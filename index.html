@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Beep Master</title>
+</head>
+<body ng-app="beep-master">
+    <div>
+        <button>Note</button>
+        <button>Note</button>
+        <button>Note</button>
+        <button>Note</button>
+        <button>Note</button>
+        <button>Note</button>
+        <button>Note</button>
+        <button>Note</button>
+    </div>
+    <div>
+        <button>Clear</button>
+        <div><label for="tempo"></label><input type="number" id="tempo"></div>
+    </div>
+    <div>
+        <div>
+            <span>ID: 1</span>
+            <span>Note: C#</span>
+            <span>v/^</span>
+            <label>Duration: </label><input type="number" step=".25" placeholder="1">
+            <span>[x]</span>
+            <span>v/^</span>
+        </div>
+    </div>
+    <div>
+        <p>beep -f 400 -D 200</p>
+    </div>
+</body>
+
+</html>
