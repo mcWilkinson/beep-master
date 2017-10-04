@@ -7,7 +7,7 @@
     
     function NotesFactory() {
         var vm = this;
-        vm.pitches = [{name: 'C#', pitch: 400},{name: 'D', pitch: 500}];
+        vm.pitches = [{name: 'C#', freq: 400},{name: 'D', freq: 500}];
         
         return vm;
     }

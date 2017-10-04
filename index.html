@@ -1,44 +1,39 @@
 <!doctype html>
 <html lang="en-US">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Beep Master</title>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    
+
     <script src="app/app.module.js"></script>
     <script src="app/components/notes/notes.factory.js"></script>
     <script src="app/components/notes/notes.controller.js"></script>
 </head>
+
 <body ng-app="beep-master" ng-controller="NotesController as ctrl">
     <div>
-        <button>Note</button>
-        <button>Note</button>
-        <button>Note</button>
-        <button>Note</button>
-        <button>Note</button>
-        <button>Note</button>
-        <button>Note</button>
-        <button>Note</button>
+        <button ng-repeat="pitch in ctrl.pitches" ng-click="ctrl.add(pitch)">{{ pitch.name }}</button>
     </div>
     <div>
-        <button>Clear</button>
+        <button ng-click="ctrl.clear">Clear</button>
         <div><label for="tempo"></label><input type="number" id="tempo"></div>
     </div>
     <div>
-        <div>
-            <span>ID: 1</span>
-            <span>Note: C#</span>
+        <div ng-repeat="note in ctrl.notes">
+            <span>ID: {{$index}}</span>
+            <span>Note: {{ note.name }}</span>
             <span>v/^</span>
-            <label>Duration: </label><input type="number" step=".25" placeholder="1">
+            <label>Duration: </label><input type="number" step=".25" ng-model="note.duration">
             <span>[x]</span>
             <span>v/^</span>
         </div>
     </div>
     <div>
-        <p>beep -f 400 -D 200</p>
+        <p>beep <span ng-repeat="note in ctrl.notes">-f {{note.freq}} -l {{note.duration}}</span></p>
     </div>
 </body>
 

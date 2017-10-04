@@ -19,11 +19,11 @@
         vm.shiftPitch = shiftPitch;
         vm.shiftPosition = shiftPosition;
         
-        function add(note) {
+        function add(pitch) {
             var n = {};
-            n.index = note.index;
-            n.name = note.name;
-            n.freq = note.freq;
+            n.index = pitch.index;
+            n.name = pitch.name;
+            n.freq = pitch.freq;
             n.duration = 1;
             
             vm.notes.push(n);
