@@ -20,7 +20,7 @@
     </div>
     <div>
         <button ng-click="ctrl.clear">Clear</button>
-        <div><label for="tempo"></label><input type="number" id="tempo"></div>
+        <div><label for="tempo"></label><input type="number" id="tempo" ng-model="ctrl.tempo"></div>
     </div>
     <div>
         <div ng-repeat="note in ctrl.notes">
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div>
-        <p>beep <span ng-repeat="note in ctrl.notes">-f {{note.freq}} -l {{note.duration}}</span></p>
+        <p>beep <span ng-repeat="note in ctrl.notes">-f {{note.freq}} -l {{duration}}</span></p>
     </div>
 </body>
 

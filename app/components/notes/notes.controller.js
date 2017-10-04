@@ -12,6 +12,7 @@
         
         vm.pitches = NotesFactory.pitches;
         vm.notes = [];
+        vm.tempo = 100;
         
         vm.add = add;
         vm.remove = remove;
