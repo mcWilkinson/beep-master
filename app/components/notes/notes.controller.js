@@ -20,9 +20,10 @@
         vm.shiftPitch = shiftPitch;
         vm.shiftPosition = shiftPosition;
         
-        function add(pitch) {
+        function add(index) {
             var n = {};
-            n.index = pitch.index;
+            var pitch = vm.pitches[index];
+            n.index = index;
             n.name = pitch.name;
             n.freq = pitch.freq;
             n.duration = 1;
@@ -41,6 +42,7 @@
         function shiftPitch(direction, note) {
             var i = note.index + direction;
             var n = vm.pitches[i];
+            console.log(n);
             note.index = i;
             note.name = n.name;
             note.freq = n.freq;
