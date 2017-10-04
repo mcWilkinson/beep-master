@@ -7,6 +7,9 @@
 
     <title>Beep Master</title>
 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
     <script src="app/app.module.js"></script>
@@ -15,25 +18,36 @@
 </head>
 
 <body ng-app="beep-master" ng-controller="NotesController as ctrl">
-    <div>
-        <button ng-repeat="pitch in ctrl.pitches" ng-click="ctrl.add(pitch)">{{ pitch.name }}</button>
-    </div>
-    <div>
-        <button ng-click="ctrl.clear">Clear</button>
-        <div><label for="tempo"></label><input type="number" id="tempo" ng-model="ctrl.tempo"></div>
-    </div>
-    <div>
-        <div ng-repeat="note in ctrl.notes">
-            <span>ID: {{$index}}</span>
-            <span>Note: {{ note.name }}</span>
-            <span>v/^</span>
-            <label>Duration: </label><input type="number" step=".25" ng-model="note.duration">
-            <span>[x]</span>
-            <span>v/^</span>
+    <div class="w3-container">
+        <div class="">
+            <button class="w3-button w3-border w3-col s1" ng-repeat="pitch in ctrl.pitches" ng-click="ctrl.add(pitch)">{{ pitch.name }}</button>
         </div>
-    </div>
-    <div>
-        <p>beep <span ng-repeat="note in ctrl.notes">-f {{note.freq}} -l {{duration}}</span></p>
+        <br>
+        <div class="w3-bar">
+            <button class="w3-button w3-border w3-col s1" ng-click="ctrl.clear()">Clear</button>
+            <div class="w3-right"><label for="tempo">Tempo: </label><input class="w3-border" type="number" id="tempo" ng-model="ctrl.tempo"></div>
+        </div>
+        <br>
+        <div class="w3-light-grey w3-card-2" style="height:500px;">
+            <div class="w3-row" ng-repeat="note in ctrl.notes">
+                <span class="w3-col s3">ID: {{$index}}</span>
+                <span class="w3-col s1">{{ note.name }}</span>
+                <div class="w3-col s1">
+                    <span class="fa fa-caret-down" ng-click="ctrl.shiftPitch(1, note)"></span><span>/</span><span class="fa fa-caret-up" ng-click="ctrl.shiftPitch(-1, note)"></span>
+                </div>
+                <div class="w3-col s6">
+                    <span>Duration: </span><input type="number" step=".25" ng-model="note.duration">
+                </div>
+                <span class="w3-col s1 fa fa-close"></span>
+                <div class="w3-col s1">
+                    <span class="fa fa-caret-down" ng-click="ctrl.shiftPosition(1, $index)"></span><span>/</span><span class="fa fa-caret-up" ng-click="ctrl.shiftPosition(-1, $index)"></span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="w3-container w3-card-2">
+            <p>beep <span ng-repeat="note in ctrl.notes">-f {{note.freq}} -l {{duration}}</span></p>
+        </div>
     </div>
 </body>
 
