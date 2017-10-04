@@ -28,7 +28,7 @@
             <div class="w3-right"><label for="tempo">Tempo: </label><input class="w3-border" type="number" id="tempo" ng-model="ctrl.tempo"></div>
         </div>
         <br>
-        <div class="w3-light-grey w3-card-2" style="height:500px;">
+        <div class="w3-light-grey w3-card-2" style="height:450px; overflow-y: scroll;">
             <div class="w3-row" ng-repeat="note in ctrl.notes">
                 <span class="w3-col s3">ID: {{$index}}</span>
                 <span class="w3-col s1">{{ note.name }}</span>
@@ -37,7 +37,7 @@
                     <span ng-if="note.index != 0 && note.index != 107" >/</span>
                     <span class="fa fa-caret-up" ng-if="note.index != 107" ng-click="ctrl.shiftPitch(-1, note)"></span>
                 </div>
-                <div class="w3-col s6">
+                <div class="w3-col s5">
                     <span>Duration: </span><input type="number" step=".25" ng-model="note.duration">
                 </div>
                 <span class="w3-col s1 fa fa-close"></span>
