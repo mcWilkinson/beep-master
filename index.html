@@ -33,9 +33,9 @@
                 <span class="w3-col s3">ID: {{$index}}</span>
                 <span class="w3-col s1">{{ note.name }}</span>
                 <div class="w3-col s1">
-                    <span class="fa fa-caret-down" ng-if="note.index != 0" ng-click="ctrl.shiftPitch(1, note)"></span>
+                    <span class="fa fa-caret-down" ng-if="note.index != 0" ng-click="ctrl.shiftPitch(-1, note)"></span>
                     <span ng-if="note.index != 0 && note.index != 107" >/</span>
-                    <span class="fa fa-caret-up" ng-if="note.index != 107" ng-click="ctrl.shiftPitch(-1, note)"></span>
+                    <span class="fa fa-caret-up" ng-if="note.index != 107" ng-click="ctrl.shiftPitch(1, note)"></span>
                 </div>
                 <div class="w3-col s5">
                     <span>Duration: </span><input type="number" ng-model="note.duration">
