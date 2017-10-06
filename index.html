@@ -13,15 +13,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
     <script src="app/app.module.js"></script>
+    <script src="app/common/filters/startfrom.filter.js"></script>
     <script src="app/components/notes/notes.factory.js"></script>
     <script src="app/components/notes/notes.controller.js"></script>
+
+
+    <link rel="stylesheet" href="assets/css/piano.css">
 </head>
 
 <body ng-app="beep-master" ng-controller="NotesController as ctrl">
     <div class="w3-container">
-        <div class="">
-            <button class="w3-button w3-border w3-col s1" ng-repeat="pitch in ctrl.pitches" ng-click="ctrl.add($index)">{{ pitch.name }}</button>
+        <div class="keyboard">
+            <button class="key" ng-repeat="pitch in ctrl.pitches | filter:'' | StartFromFilter: ctrl.page*12 | limitTo:48" 
+            ng-class="{'white': ctrl.getType($index), 'black': !ctrl.getType($index)}" ng-click="ctrl.add(pitch)"><span class="keylabel">{{ pitch.name }}</span></button>
         </div>
+        <br>
+        <button ng-click="ctrl.changePage(-1)" ng-disabled="ctrl.page == 0"><</button><button ng-click="ctrl.changePage(+1)" ng-disabled="ctrl.page == 5">></button>
         <br>
         <div class="w3-bar">
             <button class="w3-button w3-border w3-col s1" ng-click="ctrl.clear()">Clear</button>
@@ -30,17 +37,17 @@
         <br>
         <div class="w3-light-grey w3-card-2" style="height:450px; overflow-y: scroll;">
             <div class="w3-row" ng-repeat="note in ctrl.notes">
-                <span class="w3-col s3">ID: {{$index}}</span>
+                <span class="w3-col s3">ID: {{$index}}, I:{{note.index}}</span>
                 <span class="w3-col s1">{{ note.name }}</span>
                 <div class="w3-col s1">
-                    <span class="fa fa-caret-down" ng-if="note.index != 0" ng-click="ctrl.shiftPitch(1, note)"></span>
-                    <span ng-if="note.index != 0 && note.index != 107" >/</span>
-                    <span class="fa fa-caret-up" ng-if="note.index != 107" ng-click="ctrl.shiftPitch(-1, note)"></span>
+                    <span class="fa fa-caret-down" ng-if="note.index != 0" ng-click="ctrl.shiftPitch(-1, note)"></span>
+                    <span ng-if="note.index != 0 && note.index != 107">/</span>
+                    <span class="fa fa-caret-up" ng-if="note.index != 107" ng-click="ctrl.shiftPitch(1, note)"></span>
                 </div>
                 <div class="w3-col s5">
-                    <span>Duration: </span><input type="number" step=".25" ng-model="note.duration">
+                    <span>Duration: </span><input type="number" ng-model="note.duration">
                 </div>
-                <span class="w3-col s1 fa fa-close"></span>
+                <span class="w3-col s1 fa fa-close" ng-click="ctrl.remove($index)"></span>
                 <div class="w3-col s1">
                     <span class="fa fa-caret-down" ng-if="!$last" ng-click="ctrl.shiftPosition(1, $index)"></span>
                     <span ng-if="!$first && !$last">/</span>
@@ -52,7 +59,7 @@
         <div class="w3-container w3-card-2">
             <p>beep
                 <span ng-repeat="n in ctrl.notes">
-                    <span>-f {{n.freq}} -l {{ n.duration * (60000 / ctrl.tempo)}} -D 100<span ng-if="!$last"> -n</span></span>
+                    <span>-f {{n.freq}} -l {{ n.duration * (60000 / ctrl.tempo)}} -D 10<span ng-if="!$last"> -n</span></span>
                 </span>
             </p>
         </div>
