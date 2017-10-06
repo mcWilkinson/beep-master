@@ -7,7 +7,7 @@
 
     <title>Beep Master</title>
 
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -15,16 +15,19 @@
     <script src="app/app.module.js"></script>
     <script src="app/components/notes/notes.factory.js"></script>
     <script src="app/components/notes/notes.controller.js"></script>
+    
+    
+    <link rel="stylesheet" href="assets/css/piano.css">
 </head>
 
 <body ng-app="beep-master" ng-controller="NotesController as ctrl">
     <div class="w3-container">
-        <div class="">
-            <button class="w3-button w3-border w3-col s1" ng-repeat="pitch in ctrl.pitches" ng-click="ctrl.add($index)">{{ pitch.name }}</button>
+        <div class="keyboard">
+            <button class="key" ng-repeat="pitch in ctrl.pitches" ng-class="{'white': ctrl.getType($index), 'black': !ctrl.getType($index)}" ng-click="ctrl.add($index)"></button>
         </div>
         <br>
         <div class="w3-bar">
-            <button class="w3-button w3-border w3-col s1" ng-click="ctrl.clear()">Clear</button>
+            <button class="w3-button w3-border w3-col s1" ng-click="ctrl.clear()" >Clear</button>
             <div class="w3-right"><label for="tempo">Tempo: </label><input class="w3-border" type="number" id="tempo" ng-model="ctrl.tempo"></div>
         </div>
         <br>

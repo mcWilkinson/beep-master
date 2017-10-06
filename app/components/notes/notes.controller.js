@@ -19,6 +19,7 @@
         vm.clear = clear;
         vm.shiftPitch = shiftPitch;
         vm.shiftPosition = shiftPosition;
+        vm.getType = getType;
         
         function add(index) {
             var n = {};
@@ -52,6 +53,10 @@
             var temp = vm.notes[index];
             vm.notes[index] = vm.notes[index + direction];
             vm.notes[index + direction] = temp;
+        }
+        
+        function getType(index) {
+            return (index%12 == 0 || index%12 == 2 || index%12 == 4 || index%12 == 5 || index%12 == 7 || index%12 == 9 || index%12 == 11);
         }
         
     }

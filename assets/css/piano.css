@@ -1,0 +1,30 @@
+.keyboard {
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+    height: 30px;
+}
+
+.key {
+    width: 25px;
+    height: 80px;
+    padding: 0px;
+    position: relative;
+    
+}
+
+.white {
+    background-color: #EEEEEE;
+    width: 30px!important;
+    z-index: 1;
+}
+
+.black {
+    background-color: #333333;
+    vertical-align: top;
+    color: #FFFFFF;
+    height: 50px;
+    margin: -12px;
+    margin-top: 0px;
+    z-index: 1000;
+}
