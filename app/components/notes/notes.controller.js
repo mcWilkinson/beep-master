@@ -13,6 +13,7 @@
         vm.pitches = NotesFactory.pitches;
         vm.notes = [];
         vm.tempo = 100;
+        vm.page = 4;
         
         vm.add = add;
         vm.remove = remove;
@@ -20,11 +21,11 @@
         vm.shiftPitch = shiftPitch;
         vm.shiftPosition = shiftPosition;
         vm.getType = getType;
+        vm.changePage = changePage;
         
-        function add(index) {
+        function add(pitch) {
             var n = {};
-            var pitch = vm.pitches[index];
-            n.index = index;
+            n.index = vm.pitches.indexOf(pitch);
             n.name = pitch.name;
             n.freq = pitch.freq;
             n.duration = 1;
@@ -57,6 +58,10 @@
         
         function getType(index) {
             return (index%12 == 0 || index%12 == 2 || index%12 == 4 || index%12 == 5 || index%12 == 7 || index%12 == 9 || index%12 == 11);
+        }
+        
+        function changePage(direction) {
+            vm.page = vm.page + direction;
         }
         
     }

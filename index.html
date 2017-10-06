@@ -7,37 +7,41 @@
 
     <title>Beep Master</title>
 
-    <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
     <script src="app/app.module.js"></script>
+    <script src="app/common/filters/startfrom.filter.js"></script>
     <script src="app/components/notes/notes.factory.js"></script>
     <script src="app/components/notes/notes.controller.js"></script>
-    
-    
+
+
     <link rel="stylesheet" href="assets/css/piano.css">
 </head>
 
 <body ng-app="beep-master" ng-controller="NotesController as ctrl">
     <div class="w3-container">
         <div class="keyboard">
-            <button class="key" ng-repeat="pitch in ctrl.pitches" ng-class="{'white': ctrl.getType($index), 'black': !ctrl.getType($index)}" ng-click="ctrl.add($index)"></button>
+            <button class="key" ng-repeat="pitch in ctrl.pitches | filter:'' | StartFromFilter: ctrl.page*12 | limitTo:48" 
+            ng-class="{'white': ctrl.getType($index), 'black': !ctrl.getType($index)}" ng-click="ctrl.add(pitch)"><span class="keylabel">{{ pitch.name }}</span></button>
         </div>
         <br>
+        <button ng-click="ctrl.changePage(-1)" ng-disabled="ctrl.page == 0"><</button><button ng-click="ctrl.changePage(+1)" ng-disabled="ctrl.page == 5">></button>
+        <br>
         <div class="w3-bar">
-            <button class="w3-button w3-border w3-col s1" ng-click="ctrl.clear()" >Clear</button>
+            <button class="w3-button w3-border w3-col s1" ng-click="ctrl.clear()">Clear</button>
             <div class="w3-right"><label for="tempo">Tempo: </label><input class="w3-border" type="number" id="tempo" ng-model="ctrl.tempo"></div>
         </div>
         <br>
         <div class="w3-light-grey w3-card-2" style="height:450px; overflow-y: scroll;">
             <div class="w3-row" ng-repeat="note in ctrl.notes">
-                <span class="w3-col s3">ID: {{$index}}</span>
+                <span class="w3-col s3">ID: {{$index}}, I:{{note.index}}</span>
                 <span class="w3-col s1">{{ note.name }}</span>
                 <div class="w3-col s1">
                     <span class="fa fa-caret-down" ng-if="note.index != 0" ng-click="ctrl.shiftPitch(-1, note)"></span>
-                    <span ng-if="note.index != 0 && note.index != 107" >/</span>
+                    <span ng-if="note.index != 0 && note.index != 107">/</span>
                     <span class="fa fa-caret-up" ng-if="note.index != 107" ng-click="ctrl.shiftPitch(1, note)"></span>
                 </div>
                 <div class="w3-col s5">

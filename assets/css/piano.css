@@ -17,6 +17,7 @@
     background-color: #EEEEEE;
     width: 30px!important;
     z-index: 1;
+    padding-top: 50px;
 }
 
 .black {
@@ -27,4 +28,11 @@
     margin: -12px;
     margin-top: 0px;
     z-index: 1000;
+}
+
+.black > .keylabel {
+    visibility: hidden;
+}
+
+.white > .keylabel {
 }
